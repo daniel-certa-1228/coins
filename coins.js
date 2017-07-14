@@ -22,38 +22,79 @@ function coinCounter (dollarAmt) {
 
   while (dollarNoDec !== 0) {
 
-    //if whole number can be divided by 25, do it, round the remainder down and store in a variable
+    
     if (dollarNoDec >= 25) {
+        //if whole number can be divided by 25, do it, round the remainder down and store in a variable
         numberOfQuarters = Math.floor(dollarNoDec/25);
+        //set the number of quarters in the coinpurse object
         coinPurse.quarters = numberOfQuarters;
+        //calculate the remainder and store in a variable
         remainder25 = dollarNoDec -(numberOfQuarters * 25);
-      } 
-    //if whole number can be divided by 10, do it, round the remainder down and store in a variable
-    if (remainder25 >= 10) {
-        numberofDimes = Math.floor(remainder25/10);
-        coinPurse.dimes = numberofDimes;
-        remainder10 = remainder25 - (numberofDimes * 10);
-      }
-    //if whole number can be divided by 5, do it, round the remainder down and store in a variable
-    if (remainder10 >= 5) {
-        numberOfNickels = Math.floor(remainder10/5);
-        coinPurse.nickels = numberOfNickels;
-        remainder5 = remainder10 - (numberOfNickels * 5);
+        //reset dollerNoDec amount for the next section.
+        dollarNoDec = dollarNoDec - remainder25
 
-    }
-    //if whole number can be divided by 1, do it, round the remainder down and store in a variable
-    if (remainder5 >= 1) {
-      numberOfPennies = Math.floor(remainder5/1);
-      coinPurse.pennies = numberOfPennies;
-      remainder1 = remainder5 - (numberOfPennies * 1);
+      }  else {
+        //if dollarNoDec is not greater than or equal to 25, set num of quarters to 0 and move on
+        numberOfQuarters = 0;
+        coinPurse.quarters = numberOfQuarters;
+
+      }
+    
+    if (dollarNoDec >= 10) {
+        //if whole number can be divided by 10, do it, round the remainder down and store in a variable
+        numberofDimes = Math.floor(dollarNoDec/10);
+        //set the number of dimes in the coinpurse object
+        coinPurse.dimes = numberofDimes;
+        //calculate the remainder and store in a variable
+        remainder10 = dollarNoDec - (numberofDimes * 10);
+        //reset dollerNoDec amount for the next section.
+        dollarNoDec = dollarNoDec - remainder10
+      
+      }  else {
+        //if dollarNoDec is not greater than or equal to 10, set num of dimes to 0 and move on
+        numberofDimes = 0;
+        coinPurse.dimes = numberofDimes;
+
+      }
+    
+    if (dollarNoDec >= 5) {
+        //if whole number can be divided by 5, do it, round the remainder down and store in a variable
+        numberOfNickels = Math.floor(dollarNoDec/5);
+        //set the number of nickels in the coinpurse object
+        coinPurse.nickels = numberOfNickels;
+        //calculate the remainder and store in a variable
+        remainder5 = dollarNoDec - (numberOfNickels * 5);
+        //reset dollerNoDec amount for the next section.
+        dollarNoDec = dollarNoDec - remainder5;
+
+      } else {
+        //if dollarNoDec is not greater than or equal to 10, set num of dimes to 0 and move on
+        numberOfNickels = 0;
+        coinPurse.nickels = numberOfNickels;
+
+      }
+    
+    if (dollarNoDec >= 1) {
+        //if whole number can be divided by 1, do it, round the remainder down and store in a variable
+        numberOfPennies = Math.floor(dollarNoDec/1);
+        //set the number of pennies in the coinpurse object
+        coinPurse.pennies = numberOfPennies;
+        //calculate the remainder and store in a variable
+        remainder1 = dollarNoDec - (numberOfPennies * 1);
+        //reset dollerNoDec amount for the next section.
+        dollarNoDec = dollarNoDec - remainder1;
+    } else {
+        //if dollarNoDec is not greater than or equal to 10, set num of dimes to 0 and move on
+        numberOfPennies = 0;
+        coinPurse.pennies = numberOfPennies;
     }
     //break the loop!
-    dollarNoDec = remainder1;
+    break
   }
 
   return coinPurse;
 }
 
-var coins = coinCounter(.67)
+var coins = coinCounter(2.00)
 console.log(coins);
 
